@@ -10,7 +10,6 @@ export class PrismaRepository extends BookingRepository {
   }
 
   async save(booking: Booking): Promise<void> {
-    console.log('🚀 ~ PrismaRepository ~ save ~ booking:', booking);
     await this.prisma.booking.create({
       data: booking.toPrimitives(),
     });

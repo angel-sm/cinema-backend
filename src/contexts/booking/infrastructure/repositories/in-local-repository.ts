@@ -8,6 +8,7 @@ export class InLocalRepository extends BookingRepository {
     schedule: string,
     auditorium: string,
   ): Promise<Array<Booking> | []> {
+    console.log(schedule, auditorium);
     throw new Error('Method not implemented.');
   }
 
@@ -20,7 +21,6 @@ export class InLocalRepository extends BookingRepository {
 
   async save(booking: Booking): Promise<void> {
     this.bookings.push(booking.toPrimitives());
-    console.log('Bookings', JSON.stringify(this.bookings));
   }
 
   async findByBookerId(bookerId: string): Promise<Array<Booking> | []> {

@@ -10,7 +10,6 @@ export class PrismaRepository extends BookerRepository {
   }
 
   async findByEmail(email: string): Promise<Booker> {
-    console.log('🚀 ~ PrismaRepository ~ findByEmail ~ email:', email);
     const booker = await this.prisma.booker.findFirst({
       where: {
         email: {

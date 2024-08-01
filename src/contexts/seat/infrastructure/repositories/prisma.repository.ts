@@ -10,7 +10,6 @@ export class PrismaRepository extends SeatRepository {
   }
 
   async save(seat: Seat): Promise<void> {
-    console.log('🚀 ~ PrismaRepository ~ save ~ seat:', seat);
     await this.prisma.seat.create({
       data: seat.toPrimitives(),
     });

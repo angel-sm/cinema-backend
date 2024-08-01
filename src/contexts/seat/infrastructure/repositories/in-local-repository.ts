@@ -8,6 +8,5 @@ export class InLocalRepository extends SeatRepository {
 
   async save(seat: Seat): Promise<void> {
     this.seats.push(seat.toPrimitives());
-    console.log('Seats', JSON.stringify(this.seats));
   }
 }

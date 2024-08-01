@@ -11,7 +11,6 @@ export class CreateSeatUseCase {
   @OnEvent('booking.created')
   async run(dto: CreateSeatDto) {
     const seat = Seat.create(dto);
-    console.log('🚀 ~ CreateSeatUseCase ~ run ~ seat:', seat);
     await this.seatRepository.save(seat);
     return seat.toPrimitives().id;
   }
