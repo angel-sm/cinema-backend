@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Auditorium {
+  id        String    @id @default(uuid()) @map("_id")
+  name      String
+  seats     Int
+  schedules String[]
+  Booking   Booking[]
+}
+
+model Booker {
+  id       String    @id @default(uuid()) @map("_id")
+  email    String    @unique
+  password String
+  Booking  Booking[]
+}
+
+model Booking {
+  id           String     @id @default(uuid()) @map("_id")
+  auditoriumId String
+  schedule     String
+  seatId       String
+  bookerId     String
+  movieId      String
+  movie        Movie      @relation(fields: [movieId], references: [id])
+  auditorium   Auditorium @relation(fields: [auditoriumId], references: [id])
+  seat         Seat       @relation(fields: [seatId], references: [id])
+  booker       Booker     @relation(fields: [bookerId], references: [id])
+}
+
+model Movie {
+  id         String    @id @default(uuid()) @map("_id")
+  name       String
+  cover      String
+  comingSoon Boolean
+  Booking    Booking[]
+}
+
+model Seat {
+  id         String    @id @default(uuid()) @map("_id")
+  seatNumber Int
+  bookerId   String
+  Booking    Booking[]
+}
