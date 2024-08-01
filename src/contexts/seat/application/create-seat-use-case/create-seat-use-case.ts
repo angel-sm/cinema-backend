@@ -10,8 +10,18 @@ export class CreateSeatUseCase {
 
   @OnEvent('booking.created')
   async run(dto: CreateSeatDto) {
-    const seat = Seat.create(dto);
-    await this.seatRepository.save(seat);
-    return seat.toPrimitives().id;
+    const seatsId = [];
+
+    for (const seatNumber of dto.seatNumber) {
+      const seat = Seat.create({
+        bookerId: dto.bookerId,
+        seatNumber,
+      });
+      await this.seatRepository.save(seat);
+      const id = seat.toPrimitives().id;
+      seatsId.push(id);
+    }
+
+    return seatsId;
   }
 }

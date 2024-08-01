@@ -51,5 +51,5 @@ Remove .example to .env file and set variables
 
 ```bash
 JWT_SECRET_KEY=
-DATABASE_URL=
+DATABASE_URL="mongodb+srv://joseangelpacheco9729:eS1W8RnTvb7FhMdJ@cinema.2wdkjdf.mongodb.net/cinema?retryWrites=true&w=majority&appName=cinema"
 ```
