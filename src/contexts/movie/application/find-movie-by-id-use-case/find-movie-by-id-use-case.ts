@@ -8,7 +8,6 @@ export class FindMovieByIdUseCase {
   constructor(private readonly movieRepository: MovieRepository) {}
 
   async run(dto: FindMovieDto): Promise<PrimitiveMovie> {
-    console.log('🚀 ~ FindMovieByIdUseCase ~ run ~ dto:', dto);
     const movie = await this.movieRepository.findMovie(dto.id);
     return movie.toPrimitives();
   }

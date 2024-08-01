@@ -1,4 +1,4 @@
 export interface CreateSeatDto {
-  seatNumber: number;
+  seatNumber: number[];
   bookerId: string;
 }

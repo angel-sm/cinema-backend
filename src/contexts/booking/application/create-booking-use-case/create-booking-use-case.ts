@@ -17,12 +17,20 @@ export class CreateBookingUseCase {
       bookerId: dto.bookerId,
       seatNumber: dto.seatNumber,
     };
-    const [seatId] = await this.eventEmitter.emitAsync(
+    const [seatsIds] = await this.eventEmitter.emitAsync(
       'booking.created',
       seatInformation,
     );
-    dto.seatId = seatId as unknown as string;
-    const reservation = Booking.create(dto);
-    await this.bookingRepository.save(reservation);
+
+    for (const seatId of seatsIds) {
+      const reservation = Booking.create({
+        auditoriumId: dto.auditoriumId,
+        bookerId: dto.bookerId,
+        movieId: dto.movieId,
+        schedule: dto.schedule,
+        seatId,
+      });
+      await this.bookingRepository.save(reservation);
+    }
   }
 }
